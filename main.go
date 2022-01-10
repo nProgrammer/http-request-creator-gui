@@ -11,7 +11,7 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	x := 1000
-	y := 500
+	y := 1000
 	windowSize := fyne.NewSize(float32(x), float32(y))
 	w.Resize(windowSize)
 

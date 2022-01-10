@@ -37,7 +37,7 @@ func createMethodElement() (*widget.Label, *widget.Entry) {
 }
 
 func createBodyElement() (*widget.Label, *widget.Entry) {
-	bodyLabel := widget.NewLabel("HTTP method:")
+	bodyLabel := widget.NewLabel("Request body:")
 	bodyLabelPos := fyne.NewPos(float32(0), float32(95))
 	bodyLabel.Move(bodyLabelPos)
 
@@ -51,9 +51,24 @@ func createBodyElement() (*widget.Label, *widget.Entry) {
 	return bodyLabel, bodyInput
 }
 
-func createSendingElement(args []string, urlInput *widget.Entry, methodInput *widget.Entry, bodyInput *widget.Entry, y int) *widget.Button {
+func createHeaderElement() (*widget.Label, *widget.Entry) {
+	headerLabel := widget.NewLabel("Request header:")
+	headerLabelPos := fyne.NewPos(float32(0), float32(260))
+	headerLabel.Move(headerLabelPos)
+
+	headerInput := widget.NewMultiLineEntry()
+	headerInputPos := fyne.NewPos(float32(150), float32(260))
+	headerInput.Move(headerInputPos)
+	headerInput.SetPlaceHolder("Request header")
+	headerSize := fyne.NewSize(float32(400), float32(100))
+	headerInput.Resize(headerSize)
+
+	return headerLabel, headerInput
+}
+
+func createSendingElement(args []string, urlInput *widget.Entry, methodInput *widget.Entry, bodyInput *widget.Entry, headerInput *widget.Entry, y int) *widget.Button {
 	sendBT := widget.NewButton("Send request", func() {
-		returnedData, args := controllers.SendingBTrequestUIelement(args, urlInput, methodInput, bodyInput)
+		returnedData, args := controllers.SendingBTrequestUIelement(args, urlInput, methodInput, bodyInput, headerInput)
 		log.Println(returnedData)
 		log.Println(args)
 	})
