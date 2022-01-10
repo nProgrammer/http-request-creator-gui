@@ -12,7 +12,8 @@ func ShowRequestUI(x int, y int) *fyne.Container {
 	methodLabel, methodInput := createMethodElement()
 	bodyLabel, bodyInput := createBodyElement()
 	headerLabel, headerInput := createHeaderElement()
-	sendBT := createSendingElement(args, urlInput, methodInput, bodyInput, headerInput, y)
+	responseLabel, responseJSONLabel := createResponseElement()
+	sendBT := createSendingElement(args, urlInput, methodInput, bodyInput, headerInput, responseJSONLabel, y)
 
 	c := container.NewWithoutLayout(
 		urlLabel,
@@ -23,6 +24,8 @@ func ShowRequestUI(x int, y int) *fyne.Container {
 		bodyInput,
 		headerLabel,
 		headerInput,
+		responseLabel,
+		responseJSONLabel,
 		sendBT,
 	)
 	cSize := fyne.NewSize(1000, 500)

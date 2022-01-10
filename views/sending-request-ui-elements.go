@@ -66,18 +66,31 @@ func createHeaderElement() (*widget.Label, *widget.Entry) {
 	return headerLabel, headerInput
 }
 
-func createSendingElement(args []string, urlInput *widget.Entry, methodInput *widget.Entry, bodyInput *widget.Entry, headerInput *widget.Entry, y int) *widget.Button {
+func createSendingElement(args []string, urlInput *widget.Entry, methodInput *widget.Entry, bodyInput *widget.Entry, headerInput *widget.Entry, responseJSONLabel *widget.TextGrid, y int) *widget.Button {
 	sendBT := widget.NewButton("Send request", func() {
 		returnedData, args := controllers.SendingBTrequestUIelement(args, urlInput, methodInput, bodyInput, headerInput)
 		log.Println(returnedData)
 		log.Println(args)
+		responseJSONLabel.SetText(returnedData)
 	})
 	sendBTS := fyne.NewSize(100, 50)
 	sendBT.Resize(sendBTS)
 	buttonX := float32(0)
-	buttonY := float32(y - 100)
+	buttonY := float32(y - 650)
 	sendBTPos := fyne.NewPos(buttonX, buttonY)
 	sendBT.Move(sendBTPos)
 
 	return sendBT
+}
+
+func createResponseElement() (*widget.Label, *widget.TextGrid) {
+	responseLabel := widget.NewLabel("Response: ")
+	responseLabelPos := fyne.NewPos(float32(0), float32(400))
+	responseLabel.Move(responseLabelPos)
+
+	responseJSONLabel := widget.NewTextGridFromString("")
+	responseJSONLabelPos := fyne.NewPos(float32(150), float32(410))
+	responseJSONLabel.Move(responseJSONLabelPos)
+
+	return responseLabel, responseJSONLabel
 }
