@@ -5,7 +5,7 @@ import (
 	"os/exec"
 )
 
-func SendRequest(args []string) []byte {
+func sendRequest(args []string) []byte {
 	cmd := exec.Command("curl", args...)
 	log.Println("curl ", args)
 	data, err := cmd.Output()
