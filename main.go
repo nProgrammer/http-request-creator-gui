@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"request-creator-gui/controllers"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -10,6 +11,7 @@ import (
 )
 
 func main() {
+	var args []string
 	a := app.New()
 	w := a.NewWindow("Hello")
 	x := float32(1000)
@@ -50,6 +52,14 @@ func main() {
 
 	sendBT := widget.NewButton("Send request", func() {
 		log.Println(urlInput.Text, methodInput.Text, bodyInput.Text)
+		args = append(args, "-X")
+		args = append(args, methodInput.Text)
+		args = append(args, "--data")
+		args = append(args, bodyInput.Text)
+		args = append(args, urlInput.Text)
+		returnedData := controllers.SendRequest(args)
+		log.Println(string(returnedData))
+		args = args[:0]
 	})
 	sendBTS := fyne.NewSize(100, 50)
 	sendBT.Resize(sendBTS)
