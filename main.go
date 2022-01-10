@@ -37,13 +37,24 @@ func main() {
 	methodSize := fyne.NewSize(float32(400), float32(30))
 	methodInput.Resize(methodSize)
 
+	bodyLabel := widget.NewLabel("HTTP method:")
+	bodyLabelPos := fyne.NewPos(float32(0), float32(95))
+	bodyLabel.Move(bodyLabelPos)
+
+	bodyInput := widget.NewMultiLineEntry()
+	bodyInputPos := fyne.NewPos(float32(150), float32(95))
+	bodyInput.Move(bodyInputPos)
+	bodyInput.SetPlaceHolder("JSON body")
+	bodySize := fyne.NewSize(float32(400), float32(150))
+	bodyInput.Resize(bodySize)
+
 	sendBT := widget.NewButton("Send request", func() {
-		log.Println(urlInput.Text, methodInput.Text)
+		log.Println(urlInput.Text, methodInput.Text, bodyInput.Text)
 	})
 	sendBTS := fyne.NewSize(100, 50)
 	sendBT.Resize(sendBTS)
 	buttonX := float32(0)
-	buttonY := y / 5
+	buttonY := y - 100
 	sendBTPos := fyne.NewPos(buttonX, buttonY)
 	sendBT.Move(sendBTPos)
 
@@ -52,6 +63,8 @@ func main() {
 		urlInput,
 		methodLabel,
 		methodInput,
+		bodyLabel,
+		bodyInput,
 		sendBT,
 	)
 	cSize := fyne.NewSize(1000, 500)
